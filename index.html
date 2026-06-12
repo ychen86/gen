@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20rx%3D%277%27%20fill%3D%27%239c4a2f%27/%3E%3Cpath%20d%3D%27M8%209%20Q16%2027%2024%209%27%20fill%3D%27none%27%20stroke%3D%27%23f7f1e6%27%20stroke-width%3D%272.6%27%20stroke-linecap%3D%27round%27/%3E%3Ccircle%20cx%3D%2716%27%20cy%3D%2720.3%27%20r%3D%271.8%27%20fill%3D%27%23f7f1e6%27/%3E%3C/svg%3E">
+  <title>Worksheet Generators — Choose your course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4ede0;      /* page */
+    --paper-2:#efe6d6;    /* shelf back */
+    --ink:#211c17;        /* text */
+    --ink-soft:#6f6451;   /* muted text */
+    --rule:#d8cab2;       /* hairlines */
+    --foil:#f7f1e6;       /* stamped lines / cream */
+    /* cloth covers */
+    --alg1:#2c5f63;  --alg1-spine:#214a4d;
+    --geo:#8a6a2a;   --geo-spine:#6c5220;
+    --alg2:#9c4a2f;  --alg2-spine:#7c3823;
+    --shadow:rgba(33,28,23,.28);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Spectral",Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    /* faint paper grain */
+    background-image:radial-gradient(rgba(33,28,23,.022) 1px, transparent 1px);
+    background-size:4px 4px;
+  }
+
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(28px,5vw,68px) 22px 40px}
+
+  /* ---- masthead ---- */
+  .brand{
+    font-family:"Archivo",system-ui,sans-serif;
+    font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft);display:flex;align-items:center;gap:9px;
+  }
+  .brand .mark{color:var(--alg2);font-size:15px;line-height:1}
+  .hero{text-align:center;margin:clamp(34px,7vw,80px) 0 clamp(30px,5vw,56px)}
+  .eyebrow{
+    font-family:"Archivo",system-ui,sans-serif;
+    font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--alg2);margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:"Spectral",serif;font-weight:600;
+    font-size:clamp(34px,6.2vw,60px);line-height:1.04;letter-spacing:-.012em;
+    margin:0 auto;max-width:14ch;
+  }
+  .hero p{
+    margin:18px auto 0;max-width:50ch;color:var(--ink-soft);
+    font-size:clamp(15px,1.7vw,18px);line-height:1.6;
+  }
+
+  /* ---- shelf ---- */
+  .shelf{position:relative;margin-top:8px}
+  .volumes{
+    display:flex;gap:clamp(18px,3.2vw,40px);justify-content:center;
+    align-items:flex-end;flex-wrap:wrap;position:relative;z-index:2;
+  }
+  /* the shelf board */
+  .board{
+    position:relative;z-index:1;height:18px;margin-top:-9px;
+    background:linear-gradient(var(--paper-2),#e2d4bd);
+    border-top:1px solid #cdbb9d;
+    border-radius:2px;
+    box-shadow:0 16px 26px -18px var(--shadow), inset 0 2px 0 rgba(255,255,255,.45);
+    max-width:880px;margin-left:auto;margin-right:auto;
+  }
+  .board::after{ /* front lip */
+    content:"";position:absolute;left:6px;right:6px;top:100%;height:7px;
+    background:linear-gradient(#d3c3a6,#c4b291);border-radius:0 0 4px 4px;
+  }
+
+  /* ---- a volume ---- */
+  .volume{
+    --cloth:var(--alg2);--spine:var(--alg2-spine);
+    width:clamp(210px,25vw,250px);
+    text-decoration:none;color:var(--foil);
+    display:block;position:relative;
+    border-radius:5px 7px 7px 5px;
+    background:
+      linear-gradient(115deg, rgba(255,255,255,.10), rgba(0,0,0,.06) 60%),
+      var(--cloth);
+    box-shadow:0 22px 34px -22px var(--shadow), inset 0 0 0 1px rgba(0,0,0,.08);
+    padding:26px 22px 20px 30px;
+    transform:translateY(0);
+    transition:transform .42s cubic-bezier(.2,.8,.2,1), box-shadow .42s ease;
+    opacity:0;animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .volume::before{ /* spine */
+    content:"";position:absolute;left:0;top:0;bottom:0;width:13px;
+    border-radius:5px 0 0 5px;
+    background:linear-gradient(90deg,var(--spine),rgba(0,0,0,.18) 60%, rgba(255,255,255,.14));
+    box-shadow:inset -2px 0 3px rgba(0,0,0,.25);
+  }
+  .volume::after{ /* inner blind-stamp frame */
+    content:"";position:absolute;left:22px;right:14px;top:16px;bottom:14px;
+    border:1px solid rgba(247,241,230,.32);border-radius:3px;pointer-events:none;
+  }
+  .v--alg1{--cloth:var(--alg1);--spine:var(--alg1-spine);animation-delay:.05s}
+  .v--geo {--cloth:var(--geo); --spine:var(--geo-spine); animation-delay:.13s}
+  .v--alg2{--cloth:var(--alg2);--spine:var(--alg2-spine);animation-delay:.21s}
+
+  .v-kicker{
+    font-family:"Archivo",system-ui,sans-serif;
+    font-weight:600;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(247,241,230,.7);margin:2px 0 16px;
+  }
+  .emblem{display:block;width:100%;height:118px;margin:0 auto 18px}
+  .emblem svg{display:block;width:auto;height:118px;margin:0 auto}
+  .v-title{
+    font-family:"Spectral",serif;font-weight:600;
+    font-size:27px;line-height:1.05;letter-spacing:.005em;margin:0;
+  }
+  .v-sub{
+    margin:7px 0 0;font-size:13.5px;line-height:1.45;
+    color:rgba(247,241,230,.78);min-height:38px;
+  }
+  .v-foot{
+    display:flex;align-items:center;gap:8px;margin-top:18px;
+    padding-top:13px;border-top:1px solid rgba(247,241,230,.22);
+    font-family:"Archivo",system-ui,sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:.01em;
+  }
+  .v-foot .arrow{margin-left:auto;transition:transform .3s ease}
+
+  /* available volume */
+  .volume[data-state="available"]{cursor:pointer}
+  .volume[data-state="available"]:hover,
+  .volume[data-state="available"]:focus-visible{
+    transform:translateY(-14px);
+    box-shadow:0 40px 50px -26px var(--shadow), inset 0 0 0 1px rgba(0,0,0,.08);
+    outline:none;
+  }
+  .volume[data-state="available"]:hover .v-foot .arrow,
+  .volume[data-state="available"]:focus-visible .v-foot .arrow{transform:translateX(5px)}
+  .volume[data-state="available"]:focus-visible{
+    box-shadow:0 40px 50px -26px var(--shadow), 0 0 0 3px var(--paper), 0 0 0 5px var(--alg2);
+  }
+
+  /* coming-soon volume */
+  .volume[data-state="soon"]{cursor:default}
+  .volume[data-state="soon"]::after{border-style:dashed}
+  .volume[data-state="soon"] .veil{
+    position:absolute;inset:0;border-radius:5px 7px 7px 5px;
+    background:rgba(244,237,224,.30);pointer-events:none;
+  }
+  .volume[data-state="soon"] .v-foot{color:rgba(247,241,230,.82)}
+
+  /* badges */
+  .tag{
+    position:absolute;top:14px;right:-7px;z-index:3;
+    font-family:"Archivo",system-ui,sans-serif;font-weight:700;
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--alg2);background:var(--foil);
+    padding:5px 10px;border-radius:3px;
+    box-shadow:0 6px 12px -6px var(--shadow);
+  }
+  .tag::after{
+    content:"";position:absolute;top:100%;right:0;border:5px solid transparent;
+    border-top-color:#cdb78f;border-right-width:0;
+  }
+  .lock{width:14px;height:14px;flex:none}
+
+  /* ---- footer ---- */
+  .foot{
+    text-align:center;margin-top:clamp(48px,8vw,90px);
+    color:var(--ink-soft);font-size:12.5px;line-height:1.7;
+  }
+  .foot a{color:var(--ink-soft)}
+  .foot .div{margin:0 8px;color:var(--rule)}
+
+  @media (max-width:560px){
+    .volumes{flex-direction:column;align-items:center}
+    .board{display:none}
+    .v-sub{min-height:0}
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){
+    .volume{animation:none;opacity:1}
+    .volume[data-state="available"]:hover,
+    .volume[data-state="available"]:focus-visible{transform:none}
+    .v-foot .arrow{transition:none}
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <!-- Rename this wordmark to your brand -->
+    <div class="brand"><span class="mark">✶</span>Worksheet Generators</div>
+
+    <header class="hero">
+      <p class="eyebrow">Math practice, generated</p>
+      <h1>Choose your course</h1>
+      <p>Endless standards-aligned practice, card sorts, and warm-ups — built fresh for every lesson. Pick a course to begin.</p>
+    </header>
+
+    <section class="shelf" aria-label="Available courses">
+      <div class="volumes">
+
+        <!-- ALGEBRA 1 — coming soon -->
+        <div class="volume v--alg1" data-state="soon" role="group" aria-label="Algebra 1 — coming soon">
+          <span class="veil"></span>
+          <p class="v-kicker">Volume I</p>
+          <span class="emblem" aria-hidden="true">
+            <svg viewBox="0 0 100 118" fill="none" stroke="var(--foil)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- linear graph: axes + a line y = mx + b -->
+              <path d="M22 86 H86" opacity=".55"/>
+              <path d="M30 30 V94" opacity=".55"/>
+              <path d="M24 78 L82 40"/>
+              <circle cx="46" cy="62" r="3.1" fill="var(--foil)" stroke="none"/>
+              <circle cx="68" cy="48" r="3.1" fill="var(--foil)" stroke="none"/>
+              <text x="50" y="26" text-anchor="middle" font-family="Spectral, serif" font-size="12" fill="var(--foil)" stroke="none" font-style="italic">y = mx + b</text>
+            </svg>
+          </span>
+          <h2 class="v-title">Algebra 1</h2>
+          <p class="v-sub">Linear equations &amp; inequalities, systems, and functions.</p>
+          <div class="v-foot">
+            <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            Coming soon
+          </div>
+        </div>
+
+        <!-- GEOMETRY — coming soon -->
+        <div class="volume v--geo" data-state="soon" role="group" aria-label="Geometry — coming soon">
+          <span class="veil"></span>
+          <p class="v-kicker">Volume II</p>
+          <span class="emblem" aria-hidden="true">
+            <svg viewBox="0 0 100 118" fill="none" stroke="var(--foil)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- compass drawing a circle around a triangle -->
+              <circle cx="50" cy="62" r="28" opacity=".42"/>
+              <path d="M50 34 L73 75 H27 Z"/>
+              <path d="M50 24 L43 84"/>
+              <path d="M50 24 L57 84"/>
+              <circle cx="50" cy="24" r="2.6" fill="var(--foil)" stroke="none"/>
+            </svg>
+          </span>
+          <h2 class="v-title">Geometry</h2>
+          <p class="v-sub">Constructions, congruence &amp; similarity, proof, and right-triangle trig.</p>
+          <div class="v-foot">
+            <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            Coming soon
+          </div>
+        </div>
+
+        <!-- ALGEBRA 2 — live. Update href to wherever you host the generator. -->
+        <a class="volume v--alg2" data-state="available" href="worksheet-generator-v64.html" aria-label="Algebra 2 — open generator (beta)">
+          <span class="tag">Beta</span>
+          <p class="v-kicker">Volume III</p>
+          <span class="emblem" aria-hidden="true">
+            <svg viewBox="0 0 100 118" fill="none" stroke="var(--foil)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- parabola: axes + U + vertex -->
+              <path d="M22 84 H86" opacity=".55"/>
+              <path d="M54 28 V96" opacity=".55"/>
+              <path d="M30 36 Q54 100 78 36"/>
+              <circle cx="54" cy="78" r="3.1" fill="var(--foil)" stroke="none"/>
+              <text x="50" y="30" text-anchor="middle" font-family="Spectral, serif" font-size="12" fill="var(--foil)" stroke="none" font-style="italic">f(x)</text>
+            </svg>
+          </span>
+          <h2 class="v-title">Algebra 2</h2>
+          <p class="v-sub">7 units · 120 lessons — sequences and functions through statistics.</p>
+          <div class="v-foot">
+            Open generator <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </a>
+
+      </div>
+      <div class="board" aria-hidden="true"></div>
+    </section>
+
+    <footer class="foot">
+      <div>© 2026 Worksheet Generators · Each course is sold separately.</div>
+      <div style="margin-top:6px">
+        Curriculum sequence adapted from
+        <a href="https://im.kendallhunt.com" rel="noopener">Illustrative Mathematics</a>
+        (CC BY 4.0)<span class="div">·</span>Not affiliated with or endorsed by IM.
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
