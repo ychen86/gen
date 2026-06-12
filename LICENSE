@@ -1,0 +1,73 @@
+PROPRIETARY SOFTWARE LICENSE
+
+Copyright © 2026 [Yu Quan Chen]. All rights reserved.
+
+==============================================================================
+1. SCOPE
+==============================================================================
+This license covers the original software in this repository — including the
+worksheet generator, its problem- and graph-generation code, the user interface,
+and the course cover page (collectively, the "Software"). The Software is the
+proprietary work of the copyright holder named above ("the Owner").
+
+A separate curriculum attribution appears in Section 5 and is NOT claimed as
+proprietary by this license.
+
+==============================================================================
+2. RESERVATION OF RIGHTS
+==============================================================================
+All rights in the Software are reserved by the Owner. No license or right is
+granted except as expressly stated here. Viewing this code (for example, because
+a web browser must download it to run) does NOT grant any right to use, copy, or
+reuse it.
+
+==============================================================================
+3. PROHIBITED WITHOUT THE OWNER'S PRIOR WRITTEN PERMISSION
+==============================================================================
+You may NOT:
+  (a) copy, reproduce, republish, mirror, or redistribute the Software or any
+      part of its source code;
+  (b) modify, adapt, translate, decompile, reverse engineer, or create
+      derivative works from the Software;
+  (c) sell, rent, lease, sublicense, host, or otherwise commercially exploit the
+      Software or the worksheets it generates as a competing product;
+  (d) remove, obscure, or alter any copyright, attribution, or proprietary notice
+      contained in the Software.
+
+==============================================================================
+4. PERMITTED
+==============================================================================
+Teachers and other end users may use the hosted Software for its intended
+purpose — generating, displaying, printing, and distributing worksheets to their
+own students — as permitted by the Owner. This permission does not transfer any
+ownership of, or rights in, the Software itself.
+
+==============================================================================
+5. CURRICULUM ATTRIBUTION (not proprietary)
+==============================================================================
+The unit and lesson titles and the unit/lesson sequence are adapted from
+Illustrative Mathematics Algebra 2, © Illustrative Mathematics, licensed under
+the Creative Commons Attribution 4.0 International License (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+That underlying curriculum framework remains available under CC BY 4.0. This
+license applies only to the Owner's original software, code, design, and the
+implementation that generates problems and graphs. This product is not
+affiliated with, sponsored by, or endorsed by Illustrative Mathematics.
+"Illustrative Mathematics" and "IM" are trademarks of their respective owner and
+are used here solely for attribution.
+
+==============================================================================
+6. NO WARRANTY
+==============================================================================
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE OWNER BE
+LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THE
+SOFTWARE.
+
+==============================================================================
+7. CONTACT
+==============================================================================
+For permissions, licensing, or commercial inquiries, contact:
+  [ychen86@live.com]
