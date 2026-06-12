@@ -50,4 +50,4 @@ Mathematics" and "IM" are trademarks of their owner, used here only to give attr
 
 ## License
 
-© 2026 [Your Name or Company]. All rights reserved. This is proprietary software — see [LICENSE](LICENSE). The code may not be copied, modified, redistributed, or resold without written permission. (The IM-derived curriculum sequence remains under CC BY 4.0, as noted above.)
+© 2026 Yu Quan Chen. All rights reserved. This is proprietary software — see [LICENSE](LICENSE). The code may not be copied, modified, redistributed, or resold without written permission. (The IM-derived curriculum sequence remains under CC BY 4.0, as noted above.)
